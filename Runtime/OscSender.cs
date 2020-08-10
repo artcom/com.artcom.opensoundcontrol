@@ -1,4 +1,5 @@
-﻿using Artcom.OpenSoundControl.Library;
+﻿using Artcom.OpenSoundControl.Interfaces;
+using Artcom.OpenSoundControl.Library;
 using UnityEngine;
 
 namespace Artcom.OpenSoundControl.Scripts {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Artcom.OpenSoundControl.Interfaces;
 using Artcom.OpenSoundControl.Library;
 using UnityEngine;
 
@@ -13,11 +14,11 @@ namespace Artcom.OpenSoundControl.Scripts {
         public string url;
         public int port;
     }
-    
+
     /// <summary>
     /// 
     /// </summary>
-    public class OscReceiver : MonoBehaviour {
+    public class OscReceiver : MonoBehaviour, IOscReceiver {
         [SerializeField] private List<UnityEngine.Object> readers;
         [SerializeField] private int inPort;
 

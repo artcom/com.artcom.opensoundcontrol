@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
+using Artcom.OpenSoundControl.Interfaces;
 using Artcom.OpenSoundControl.Library;
 using Artcom.OpenSoundControl.Scripts;
 using UnityEditor;
