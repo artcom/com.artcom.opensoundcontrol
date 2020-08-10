@@ -1,9 +1,9 @@
-﻿using Artcom.OpenSoundControl.Library;
-using Artcom.OpenSoundControl.Scripts;
+﻿using Artcom.OpenSoundControl.Components;
+using Artcom.OpenSoundControl.Library;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace DefaultNamespace {
+namespace Artcom.OpenSoundControl.Example {
     public class FpsDebugSender : MonoBehaviour {
         [SerializeField] private OscLatcher latcher;
         [SerializeField] private Text text;

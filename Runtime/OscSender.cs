@@ -2,7 +2,7 @@
 using Artcom.OpenSoundControl.Library;
 using UnityEngine;
 
-namespace Artcom.OpenSoundControl.Scripts {
+namespace Artcom.OpenSoundControl.Components {
     /// <summary>
     /// OSC Sender to a specified address and port.
     /// </summary>

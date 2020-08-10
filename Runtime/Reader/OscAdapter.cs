@@ -2,7 +2,7 @@
 using Artcom.OpenSoundControl.Library;
 using UnityEngine;
 
-namespace Artcom.OpenSoundControl.Scripts {
+namespace Artcom.OpenSoundControl.Components {
 
 
     public abstract class OscAdapter : MonoBehaviour, IOscAdapter {

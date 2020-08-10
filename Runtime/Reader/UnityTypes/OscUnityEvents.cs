@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Artcom.OpenSoundControl.Scripts {
+namespace Artcom.OpenSoundControl.Components {
     [Serializable] public class Vec2Event : UnityEvent<Vector2> { }
     [Serializable] public class Vec3Event : UnityEvent<Vector3> { }
     [Serializable] public class Vec4Event : UnityEvent<Vector4> { }

@@ -4,7 +4,7 @@ using Artcom.OpenSoundControl.Interfaces;
 using Artcom.OpenSoundControl.Library;
 using UnityEngine;
 
-namespace Artcom.OpenSoundControl.Scripts {
+namespace Artcom.OpenSoundControl.Components {
     /// <summary>
     /// Automatic endpoint latcher that acts like a sender but has no fixed endpoint.
     /// </summary>

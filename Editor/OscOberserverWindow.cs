@@ -1,11 +1,8 @@
-﻿using System.CodeDom;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
+﻿using System.Collections.Generic;
 using System.Text;
+using Artcom.OpenSoundControl.Components;
 using Artcom.OpenSoundControl.Interfaces;
 using Artcom.OpenSoundControl.Library;
-using Artcom.OpenSoundControl.Scripts;
 using UnityEditor;
 using UnityEngine;
 

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine.Events;
 
-namespace Artcom.OpenSoundControl.Scripts {
+namespace Artcom.OpenSoundControl.Components {
     [Serializable] public class VoidEvent : UnityEvent { }
     [Serializable] public class FloatEvent : UnityEvent<float> { }
     [Serializable] public class IntEvent : UnityEvent<int> { }

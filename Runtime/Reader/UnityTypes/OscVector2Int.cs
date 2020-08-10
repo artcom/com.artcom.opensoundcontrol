@@ -1,7 +1,7 @@
 ﻿using Artcom.OpenSoundControl.Library;
 using UnityEngine;
 
-namespace Artcom.OpenSoundControl.Scripts.UnityTypes {
+namespace Artcom.OpenSoundControl.Components.UnityTypes {
     [AddComponentMenu("OSC/Reader/OSC Vector2Int Reader")]
     public class OscVector2Int : OscAdapter {
         public Vector2Int lastValue;

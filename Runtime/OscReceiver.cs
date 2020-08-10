@@ -4,7 +4,7 @@ using Artcom.OpenSoundControl.Interfaces;
 using Artcom.OpenSoundControl.Library;
 using UnityEngine;
 
-namespace Artcom.OpenSoundControl.Scripts {
+namespace Artcom.OpenSoundControl.Components {
     /// <summary>
     /// OSC Bundles which should not be used - just visible for serialization reasons in Unity
     /// </summary>
