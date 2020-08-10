@@ -1,0 +1,15 @@
+{
+    "name": "Artcom.OpenSoundControl.Example",
+    "references": [
+        "Artcom.OpenSoundControl"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

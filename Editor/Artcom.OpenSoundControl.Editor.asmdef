@@ -1,0 +1,17 @@
+{
+    "name": "Artcom.OpenSoundControl.Editor",
+    "references": [
+        "Artcom.OpenSoundControl"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
