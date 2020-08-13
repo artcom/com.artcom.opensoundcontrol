@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Artcom.OpenSoundControl.Components {
     [AddComponentMenu("OSC/Reader/OSC Float Reader")]
-    public class OscFloat : OscAdapter {
+    public class OscFloat : UnityOscAdapter {
         public float lastValue;
         public FloatEvent eventListener;
 

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Artcom.OpenSoundControl.Components {
     [AddComponentMenu("OSC/Reader/OSC Bool Reader")]
-    public class OscBool : OscAdapter {
+    public class OscBool : UnityOscAdapter {
         public bool lastValue;
         public BoolEvent eventListener;
 

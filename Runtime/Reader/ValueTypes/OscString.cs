@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Artcom.OpenSoundControl.Components {
     [AddComponentMenu("OSC/Reader/OSC String Reader")]
-    public class OscString : OscAdapter {
+    public class OscString : UnityOscAdapter {
         public string lastValue;
         public StringEvent eventListener;
 

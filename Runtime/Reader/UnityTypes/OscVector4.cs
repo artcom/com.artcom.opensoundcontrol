@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Artcom.OpenSoundControl.Components.UnityTypes {
     [AddComponentMenu("OSC/Reader/OSC Vector4 Reader")]
-    public class OscVector4 : OscAdapter {
+    public class OscVector4 : UnityOscAdapter {
         public Vector4 lastValue;
         public Vec4Event eventListener;
         

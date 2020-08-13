@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Artcom.OpenSoundControl.Components {
 
 
-    public abstract class OscAdapter : MonoBehaviour, IOscAdapter {
+    public abstract class UnityOscAdapter : MonoBehaviour, IOscAdapter {
         /// <summary>
         /// Matching pattern which is matched with by default. This needs to be set, otherwise default matching will not
         /// work. <see cref="pattern"/> is not used for matching!

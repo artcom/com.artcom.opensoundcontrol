@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Artcom.OpenSoundControl.Components;
 using Artcom.OpenSoundControl.Interfaces;
@@ -17,7 +19,8 @@ namespace Artcom.OpenSoundControl.Editor {
 		private int repaintCounter;
 		private bool needsRepainting;
 		private StringBuilder stringBuilder;
-		[SerializeField] private List<OscReceiver> observedReceivers;
+		private Vector2 scrollPosition;
+		[SerializeField] private List<IOscReceiver> observedReceivers;
 		
 #region Unity Runtime + Bindings
 		[MenuItem("Window/OSC Monitor")] 
@@ -29,14 +32,16 @@ namespace Artcom.OpenSoundControl.Editor {
 
 		private void Awake() {
 			stringBuilder = new StringBuilder();
-			observedReceivers = new List<OscReceiver>();
+			observedReceivers = new List<IOscReceiver>();
 			stringBuilder = new StringBuilder();
 			indexer = 0;
-			messageBuffer = new string[32];
+			messageBuffer = new string[1024];
+			// bottoming out the scroll view
+			scrollPosition = new Vector2(0, float.MaxValue);
 			ClearMessageBuffer();
 			FindCurrentPlayModeState();
 		}
-
+		
 		private void OnDestroy() {
 			DetachEditorWindow();
 		}
@@ -68,14 +73,14 @@ namespace Artcom.OpenSoundControl.Editor {
 			if(playModeState == PlayModeState.Play && newState == PlayModeState.Stop) {
 				needsRepainting = true;
 				ClearMessageBuffer();
-				observedReceivers = new List<OscReceiver>();
+				observedReceivers = new List<IOscReceiver>();
 			}
 
 			// we went from a stopped state to playing
 			if(playModeState == PlayModeState.Stop && newState == PlayModeState.Play) {
 				needsRepainting = true;
 				ClearMessageBuffer();
-				observedReceivers = new List<OscReceiver>();
+				observedReceivers = new List<IOscReceiver>();
 			}
 
 			playModeState = newState;
@@ -99,11 +104,13 @@ namespace Artcom.OpenSoundControl.Editor {
 			EditorGUILayout.LabelField(string.Format("Monitoring currently {0} receivers...", observedReceivers.Count));
 			EditorGUILayout.EndVertical();
 			EditorGUILayout.LabelField("Message Buffer: ");
-			EditorGUILayout.BeginVertical("Box");
+			scrollPosition = GUILayout.BeginScrollView(scrollPosition);
+			// EditorGUILayout.BeginVertical("Box");
 			for(var i = 0; i < messageBuffer.Length; i++) {
 				EditorGUILayout.LabelField(messageBuffer[(i + indexer) % messageBuffer.Length]);
 			}
-			EditorGUILayout.EndVertical();
+			GUILayout.EndScrollView();
+			// EditorGUILayout.EndVertical();
 		}
 #endregion
 #region Helpers

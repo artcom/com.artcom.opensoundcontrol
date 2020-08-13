@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Artcom.OpenSoundControl.Components {
     [AddComponentMenu("OSC/Reader/OSC Byte Reader")]
-    public class OscByte : OscAdapter {
+    public class OscByte : UnityOscAdapter {
         public byte lastValue;
         public ByteEvent eventListener;
 

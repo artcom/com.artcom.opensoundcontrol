@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Artcom.OpenSoundControl.Interfaces;
 using UnityEngine;
 
 namespace Artcom.OpenSoundControl.Components {
@@ -6,9 +7,9 @@ namespace Artcom.OpenSoundControl.Components {
     /// Simple singleton to keep track of all receivers
     /// </summary>
     public class OscReceiverManager : MonoBehaviour {
-        public List<OscReceiver> receivers;
+        public List<IOscReceiver> receivers;
 
-        public void Add(OscReceiver component) {
+        public void Add(IOscReceiver component) {
             if (receivers.Contains(component)) {
                 return;
             }
@@ -16,7 +17,7 @@ namespace Artcom.OpenSoundControl.Components {
             receivers.Add(component);
         }
 
-        public void Remove(OscReceiver component) {
+        public void Remove(IOscReceiver component) {
             if (receivers.Contains(component)) {
                 receivers.Add(component);
             }
@@ -122,7 +123,7 @@ namespace Artcom.OpenSoundControl.Components {
                 isInitDone = false;
             }
 
-            receivers = new List<OscReceiver>();
+            receivers = new List<IOscReceiver>();
         }
 
         /// <summary>

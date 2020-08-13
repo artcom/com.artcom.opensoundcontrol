@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Artcom.OpenSoundControl.Interfaces;
 using Artcom.OpenSoundControl.Library;
@@ -6,19 +7,33 @@ using UnityEngine;
 
 namespace Artcom.OpenSoundControl.Components {
     /// <summary>
-    /// Automatic endpoint latcher that acts like a sender but has no fixed endpoint.
+    /// Automatic endpoint latcher that acts like a sender but has no fixed endpoint. Sending a port to the enabling/
+    /// disabling patterns activates a sender that sends debug data to it.
     /// </summary>
     public class OscLatcher : MonoBehaviour, IOscSender, IOscAdapter {
-        private GameObject senderHostObject;
-        private List<IPAddress> endpoints;
+        [Serializable]
+        internal struct IPAddress {
+            public string remoteAddress;
+            public int port;
+            public OscSender sender;
+
+            public IPAddress(string remoteAddress, int port, OscSender sender) {
+                this.remoteAddress = remoteAddress;
+                this.port = port;
+                this.sender = sender;
+            }
+        }
+
+        // these fields do not need to be visible in a regular inspector
+        internal GameObject senderHostObject;
+        internal List<IPAddress> endpoints;
+
         [SerializeField] private string enableListeningPattern = "/debug/enable";
         [SerializeField] private string disableListeningPattern = "/debug/disable";
-
         [SerializeField] private AddressPattern enablePattern;
         [SerializeField] private AddressPattern disablePattern;
-
         [SerializeField] private OscReceiver targetReceiver;
-        
+
         private void Awake() {
             endpoints = new List<IPAddress>();
         }
@@ -26,10 +41,11 @@ namespace Artcom.OpenSoundControl.Components {
         private void Start() {
             enablePattern = new AddressPattern(enableListeningPattern);
             disablePattern = new AddressPattern(disableListeningPattern);
-            if(targetReceiver == null) {
+            if (targetReceiver == null) {
                 Debug.LogErrorFormat("No target receiver on this Adapter [{0}] given.", GetType().Name);
                 return;
             }
+
             targetReceiver.RegisterReader(this);
         }
 
@@ -44,14 +60,13 @@ namespace Artcom.OpenSoundControl.Components {
 
             Process(message, remoteAddress, port);
             return true;
-
         }
 
         public void Process(OscMessage message, string remoteAddress, int port) {
             if (message.Arguments.Count <= 0) {
                 return;
             }
-            
+
             int resolvePort;
             switch (message.Arguments[0]) {
                 case int x:
@@ -65,9 +80,6 @@ namespace Artcom.OpenSoundControl.Components {
             }
 
             if (enablePattern.IsMatch(message.Address)) {
-
-
-
                 AttachSender(remoteAddress, resolvePort);
             } else {
                 DetachSender(remoteAddress, resolvePort);
@@ -79,6 +91,7 @@ namespace Artcom.OpenSoundControl.Components {
             if (endpoints.Any(x => x.remoteAddress == remoteAddress && x.port == port)) {
                 return;
             }
+
             EnsureHost();
             var sender = senderHostObject.AddComponent<OscSender>();
             sender.Address = remoteAddress;
@@ -89,11 +102,13 @@ namespace Artcom.OpenSoundControl.Components {
 
         private void DetachSender(string remoteAddress, int port) {
             var index = endpoints.FindIndex(x => x.remoteAddress == remoteAddress && x.port == port);
+            // the request for removal comes from an endpoint/port that we don't know
             if (index < 0) {
                 return;
             }
+
             var endpoint = endpoints[index];
-            Destroy((UnityEngine.Object) endpoint.sender);
+            Destroy(endpoint.sender);
             endpoints.RemoveAt(index);
         }
 
@@ -106,20 +121,11 @@ namespace Artcom.OpenSoundControl.Components {
             DontDestroyOnLoad(senderHostObject);
         }
 
-        private struct IPAddress {
-            public string remoteAddress;
-            public int port;
-            public IOscSender sender;
-
-            public IPAddress(string remoteAddress, int port, IOscSender sender) {
-                this.remoteAddress = remoteAddress;
-                this.port = port;
-                this.sender = sender;
-            }
-        }
+        #region Interface Implementation
 
         public int OutPort { get; set; }
         public string Address { get; set; }
+
         public void Send(byte[] data) {
             foreach (var endpoint in endpoints) {
                 endpoint.sender.Send(data);
@@ -131,5 +137,7 @@ namespace Artcom.OpenSoundControl.Components {
                 endpoint.sender.Send(packet);
             }
         }
+
+        #endregion
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Artcom.OpenSoundControl.Components {
     [AddComponentMenu("OSC/Reader/OSC Double Reader")]
-    public class OscDouble : OscAdapter {
+    public class OscDouble : UnityOscAdapter {
         public double lastValue;
         public DoubleEvent eventListener;
 

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Artcom.OpenSoundControl.Components.UnityTypes {
     [AddComponentMenu("OSC/Reader/OSC Quaternion Reader")]
-    public class OscQuaternion : OscAdapter {
+    public class OscQuaternion : UnityOscAdapter {
         public Quaternion lastValue;
         public QuaternionEvent eventListener;
         
